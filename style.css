@@ -1,0 +1,116 @@
+body {
+  background-color: #f9f7f4;
+}
+aside {
+  background-color: #d4e0f1;
+  min-height: 100vh;
+  padding: 20px;
+  width: 300px;
+  
+}
+.navbar-vertical {
+  background-color: #0d3569;
+  width: 70px;
+  padding-top: 20px;
+  position: sticky;
+  top: 0; /* It will stick when it reaches the top */
+  height: 100vh; /* Ensures full height */
+}
+
+.navbar-vertical2 {
+  background-color: #d4e0f1;
+  width: 280px;
+  padding-top: 20px;
+  position: sticky;
+  top: 0; /* It will stick when it reaches the top */
+  height: 100vh; /* Ensures full height */
+}
+.navbar-vertical a {
+  color: white;
+  font-size: 30px;
+  display: block;
+  text-align: center;
+  margin: 10px 0;
+}
+.btn-custom {
+  background-color: #0d3569;
+  color: #d4e0f1;
+}
+.btn-custom:hover {
+  background-color: #0d3569;
+  color: #d4e0f1;
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in;
+}
+.icon {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.profile-icon {
+  width: 100px;
+  height: 100px;
+}
+.profile-icon {
+  width: 100px;
+  height: 100px;
+}
+.section {
+  padding: 50px;
+}
+@font-face {
+  font-family: 'lexend-bold';
+  src: url(fonts/Lexend-Bold.ttf);
+}
+
+.title{
+  font-family: 'lexend-bold', sans-serif;
+  color: #d4e0f1;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.title1{
+  font-family: 'lexend-bold', sans-serif;
+  color: #d4e0f1;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.title2{
+  font-family: 'lexend-bold', sans-serif;
+  color: #0d3569;
+  position:relative;
+  right: 85px;  
+}
+
+
+.bottom-content{
+  margin-top: 350px;
+}
+
+
+.card{
+  width: 1120px;
+  height: 150px;
+  margin-bottom: 40px;
+  margin-left: 20px;
+  
+}
+
+/* nice scroll bar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb {
+  background: #0d3569;
+  border-radius: 50px;
+}
+
+.container {
+  margin-top: 40px;
+}
+
