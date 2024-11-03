@@ -1,5 +1,5 @@
 body {
-  background-color: #f9f7f4;
+  background-color: #f5f5f5;
 }
 aside {
   background-color: #d4e0f1;
@@ -17,14 +17,6 @@ aside {
   height: 100vh; /* Ensures full height */
 }
 
-.navbar-vertical2 {
-  background-color: #d4e0f1;
-  width: 280px;
-  padding-top: 20px;
-  position: sticky;
-  top: 0; /* It will stick when it reaches the top */
-  height: 100vh; /* Ensures full height */
-}
 .navbar-vertical a {
   color: white;
   font-size: 30px;
@@ -79,8 +71,11 @@ aside {
 .title2{
   font-family: 'lexend-bold', sans-serif;
   color: #0d3569;
-  position:relative;
-  right: 85px;  
+  margin: 0;
+  padding: 0;
+  position: relative;
+  right: 80px;
+  bottom: 20px;
 }
 
 
@@ -114,3 +109,102 @@ aside {
   margin-top: 40px;
 }
 
+.sleep-pattern-card {
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  line-height: 7px;
+  justify-content: space-between; /* Pushes the content and image apart */
+}
+
+.sleep-pattern-card h5 {
+  color: grey;
+}
+
+.analysis-card {
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.emotion-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  flex-shrink: 0;
+}
+
+/* Limit overflow and hide scrollbar */
+.scrollable-section {
+  max-height: 370px;
+  overflow-y: auto;
+  scrollbar-width: none; /* For Firefox */
+}
+
+.scrollable-section::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.analysis {
+  font-size: 18px;
+}
+
+.highlight-good {
+  color: #00b8e6;
+}
+
+.highlight-bad {
+  color: #e60000;
+}
+
+.bottom-content {
+  margin-top: 350px;
+}
+.emotion-image img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover; 
+  flex-shrink: 0;
+}
+
+.col-md-6{
+  margin-top: -30px;
+  background-color: #d4e0f1;
+  border: 20px solid #f5f5f5; /* Add a border */
+  padding: 15px; /* Add padding for spacing inside the container */
+  border-radius: 30px;
+}
+
+.fixed-header{
+  position: relative;
+}
+
+.carousel-inner{
+  margin-top: 10px;
+  margin-left: -10px;
+}
+.card-group{
+  margin: 30px;
+}
+
+.carousel-control-prev{
+  margin-left: -70px;
+}
+
+.carousel-control-next{
+  margin-right: -70px;
+}
+
+.carousel-indicators{
+  margin-bottom: -10px;
+}
