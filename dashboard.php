@@ -6,6 +6,9 @@ $username = $_SESSION['username'];
 $age = $_SESSION['age'];
 $password = $_SESSION['password'];
 $birthdate = $_SESSION['birthdate'];
+$id = $_SESSION['id'];
+
+
 
 ?>
 

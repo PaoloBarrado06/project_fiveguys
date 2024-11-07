@@ -7,10 +7,10 @@
 if(isset($_POST['signIn'])){
    $email=$_POST['email'];
    $password=$_POST['password'];
+   $id = '';
 
    
    $sql="SELECT * FROM accounts WHERE email='$email' and password='$password'";
-   $user="SELECT username FROM accounts WHERE email='$email' and password='$password'";
    $result=$mysqli->query($sql);
    if($result->num_rows>0){
     session_start();
@@ -20,7 +20,8 @@ if(isset($_POST['signIn'])){
     $_SESSION['password']=$row['password'];
     $_SESSION['age']=$row['age'];
     $_SESSION['birthdate']=$row['birthdate'];
-    header("Location: dashboard.php");
+    $_SESSION['id']=$row['id'];
+    header("Location: feeling.php");
     exit();
    }
    else{
