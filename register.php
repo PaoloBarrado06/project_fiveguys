@@ -1,3 +1,119 @@
+<?php
+// Include config file
+require_once "config.php";
+
+// Define variables and initialize with empty values
+$first_name = $last_name = $age = $birthdate = $email = $username = $password = "";
+$first_name_err = $last_name_err = $age_err = $birthdate_err = $email_err = $username_err = $password_err = "";
+
+// Processing form data when form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validate first name
+    $input_first_name = trim($_POST["first_name"]);
+    if (empty($input_first_name)) {
+        $first_name_err = "Please enter your first name.";
+    } else {
+        $first_name = $input_first_name;
+    }
+
+    // Validate last name
+    $input_last_name = trim($_POST["last_name"]);
+    if (empty($input_last_name)) {
+        $last_name_err = "Please enter your last name.";
+    } else {
+        $last_name = $input_last_name;
+    }
+
+    // Validate age
+    $input_age = trim($_POST["age"]);
+    if (empty($input_age)) {
+        $age_err = "Please enter your age.";
+    } else {
+        $age = $input_age;
+    }
+
+    // Validate birthdate
+    $input_birthdate = trim($_POST["birthdate"]);
+    if (empty($input_birthdate)) {
+        $birthdate_err = "Please enter your birthdate.";
+    } else {
+        $birthdate = $input_birthdate;
+    }
+
+    // Validate email
+    $input_email = trim($_POST["email"]);
+    if (empty($input_email)) {
+        $email_err = "Please enter your email.";
+    } else {
+        // Check if email is already used
+        $verify_query = mysqli_query($mysqli, "SELECT email FROM accounts WHERE email='$input_email'");
+        if (mysqli_num_rows($verify_query) != 0) {
+            $email_err = "This email is already in use. Please try another one.";
+            echo "<script type='text/javascript'>var emailError = '$email_err';</script>";
+        } else {
+            $email = $input_email;
+        }
+    }
+
+    // Validate username
+    $input_username = trim($_POST["username"]);
+    if (empty($input_username)) {
+        $username_err = "Please enter your username.";
+    } else {
+        $username = $input_username;
+    }
+
+    // Validate password
+    $input_password = trim($_POST["password"]);
+    if (empty($input_password)) {
+        $password_err = "Please enter your password.";
+    } else {
+        $password = $input_password;
+    }
+
+    // Check input errors before inserting in database
+    if (empty($first_name_err) && empty($last_name_err) &&
+        empty($age_err) && empty($birthdate_err) &&
+        empty($email_err) && empty($username_err) &&
+        empty($password_err)) {
+
+        // Prepare an insert statement
+        $sql = "INSERT INTO accounts (first_name, last_name, age, birthdate, email, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        if ($stmt = $mysqli->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bind_param("sssssss", $param_first_name, $param_last_name, $param_age, $param_birthdate, $param_email, $param_username, $param_password);
+
+            // Set parameters
+            $param_first_name = $first_name;
+            $param_last_name = $last_name;
+            $param_age = $age;
+            $param_birthdate = $birthdate;
+            $param_email = $email;
+            $param_username = $username;
+            $param_password = $password;
+            
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                // Records created successfully. Redirect to landing page
+                header("location: index.php");
+                exit();
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+
+        // Close statement
+        $stmt->close();
+    }
+    
+    // Close connection
+    $mysqli->close();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -148,44 +264,56 @@
             <div class="text-center mb-4 form-header">
                 <span>SIGN</span> UP
             </div>
-            <form>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                        <input type="text" name="first_name" placeholder="First Name" required class="form-control  <?php echo (!empty($first_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $first_name; ?>">
+                        <span class="invalid-feedback"><?php echo $first_name_err; ?></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                        <input type="text" name="last_name" placeholder="Last Name" required class="form-control  <?php echo (!empty($last_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $last_name; ?>">
+                        <span class="invalid-feedback"><?php echo $last_name_err; ?></span>
                     </div>
                 </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <input type="number" class="form-control" id="age" placeholder="Age" required>
+                        <input type="number" name="age" placeholder="Age" required class="form-control  <?php echo (!empty($age_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $age; ?>">
+                        <span class="invalid-feedback"><?php echo $age_err; ?></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <input type="date" class="form-control" id="birthdate" placeholder="Birthdate" required>
+                        <input type="date" name="birthdate" placeholder="Birthday" required class="form-control  <?php echo (!empty($birthdate_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $birthdate; ?>">
+                        <span class="invalid-feedback"><?php echo $birthdate_err; ?></span>
                     </div>
                 </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <input type="email" class="form-control" id="email" placeholder="Email Address" required>
+                        <input type="email" name="email" placeholder="Email" required class="form-control  <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+                        <span class="invalid-feedback"><?php echo $email_err; ?></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <input type="text" class="form-control" id="username" placeholder="Username" required>
+                        <input type="text" name="username" placeholder="Username" required class="form-control  <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
+                        <span class="invalid-feedback"><?php echo $username_err; ?></span>
                     </div>
                 </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <input type="password" class="form-control" id="password" placeholder="Password" required>
+                        <input type="password" name="password" placeholder="Password" required class="form-control  <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
+                        <span class="invalid-feedback"><?php echo $password_err; ?></span>
                     </div>
                     <div class="form-group col-md-6">
                         <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required oninput="checkPasswordMatch()">
                     </div>
                 </div>
+
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="terms">
                     <label class="form-check-label" for="terms">By creating this account, you agree to the <a href="#" id="termsLink">Terms & Conditions</a></label>
-                  </div>
-                <a href="https://www.facebook.com/paolo.barrado/">
+                </div>
+                
+                <a>
                     <button type="submit" id="submitBtn" class="btn btn-submit btn-block">S U B M I T
                     </button>
                 </a>

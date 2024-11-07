@@ -1,3 +1,35 @@
+<?php 
+
+    include 'config.php';
+
+
+
+if(isset($_POST['signIn'])){
+   $email=$_POST['email'];
+   $password=$_POST['password'];
+
+   
+   $sql="SELECT * FROM accounts WHERE email='$email' and password='$password'";
+   $user="SELECT username FROM accounts WHERE email='$email' and password='$password'";
+   $result=$mysqli->query($sql);
+   if($result->num_rows>0){
+    session_start();
+    $row=$result->fetch_assoc();
+    $_SESSION['email']=$row['email'];
+    $_SESSION['username']=$row['username'];
+    $_SESSION['password']=$row['password'];
+    $_SESSION['age']=$row['age'];
+    $_SESSION['birthdate']=$row['birthdate'];
+    header("Location: dashboard.php");
+    exit();
+   }
+   else{
+    header("Location: errorpage.php");
+    exit();
+   }
+
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,8 +44,8 @@
     
     <style>
         h1 {
-            font-family: 'Lexend';
-            font-weight: 700;
+            font-family: 'Lexend';   
+            font-weight: 700;   
             color: #0d3569;
             text-align: center;
             font-size: 45pt;
@@ -30,6 +62,16 @@
             color: white;
         }
 
+        .message{
+            text-align: center;
+            background: #f9eded;
+            padding: 15px 0px;
+            border:1px solid #699053;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: red;
+        }
+
     </style>
 
   </head>
@@ -41,37 +83,23 @@
                     <div class="card border-0 shadow-sm" style="min-width: 350px; background-color: #c2e2ff;">
                         <div class="card-body">
                             <h1> UPLIFT </h1>
-                            <form action="">
-                                <div class="input-group my-4">
+                            <form method="POST" action="">
+                                <div class="field input-group my-4">
                                     <span class="input-group-text" id="email-addon">
                                         <i class="fas fa-envelope"></i>
                                     </span>
                                     <input type="email" name="email" id="email" class="form-control py-2" placeholder="Email ID" aria-describedby="email-addon" required>
                                 </div>
                                 
-                                <div class="input-group my-4">
+                                <div class="field input-group my-4">
                                     <span class="input-group-text" id="password-addon">
                                         <i class="fas fa-lock"></i>
                                     </span>
-                                    <input type="password" name="password" id="password" class="form-control py-2" placeholder="Password" aria-describedby="password-addon" readonly>
-                                </div>
-        
-
-                                <div class="d-flex justify-content-between align-items-center my-3">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="rememberMe">
-                                        <label class="form-check-label small" for="rememberMe" style="font-style: italic">Remember Me</label>
-                                    </div>
-                                    <a href="#" class="text-decoration-none small" style="font-style: italic;">Forgot Password?</a>
+                                    <input type="password" name="password" id="password" class="form-control py-2" placeholder="Password" aria-describedby="password-addon" required>
                                 </div>
                                 
-                                <div class="text-center mt-3">
-                                    <a href="dashboard.html">
-                                        <button type="button" id="btnLogin" class="btn btn-primary btn-login w-100" style="background-color: #0d3569; border: none;">L O G I N 
-                                        </button>
-                                    </a>
-                                    <a href="register.html" class="text-decoration-none small">Gusto mo ng account?</a>
-                                </div>
+                                <input type="submit" id="btnLogin" class="btn btn-primary btn-login w-100" style="background-color: #0d3569; border: none;" value="L O G I N " name="signIn">
+                                <a href="register.php" class="text-decoration-none small">Gusto mo ng account?</a>
                             </form>
                         </div>
                     </div>

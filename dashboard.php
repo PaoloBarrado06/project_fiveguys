@@ -1,3 +1,14 @@
+<?php
+session_start();
+include("config.php");
+$email = $_SESSION['email'];
+$username = $_SESSION['username'];
+$age = $_SESSION['age'];
+$password = $_SESSION['password'];
+$birthdate = $_SESSION['birthdate'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +32,7 @@
         <nav class="navbar-vertical d-flex flex-column align-items-center">
 
             <h1 class="title">UP</h1>
-
-            <a class="nav-link" href="https://www.facebook.com/paolo.barrado/" target="_blank">
+            <a class="nav-link" href="dashboard.php">
                 <i class="icon bi bi-grid-fill"></i> 
                 <h6 class="title1" style="font-size: 10px">Dashboard</h6>
             </a>
@@ -32,12 +42,12 @@
                 <h6 class="title1" style="font-size: 10px">Calendar</h6>
             </a>
 
-            <a class="nav-link" href="https://www.facebook.com/paolo.barrado/" target="_blank">
+            <a class="nav-link" href="account.php">
                 <i class="icon bi bi-gear-fill"></i>
                 <h6 class="title1" style="font-size: 10px">Settings</h6>
             </a>
 
-            <a class="nav-link"href="index.html" target="_blank">
+            <a class="nav-link"href="index.php">
                 <i class="icon bi bi-box-arrow-right"></i>
                 <h6 class="title1" style="font-size: 10px">Logout</h6> 
             </a>
@@ -48,8 +58,10 @@
         <div id="about" class="container" >
 
             <h1 class="title2">LIFT</h1>
+            <h1>Welcome! <span style='color:#0d3569;'><?php echo htmlspecialchars($username); ?></span></h1>
+            <br><br>
 
-            <div class="row">
+            <div class="row" style="margin-bottom: -33px;">
               <!-- Education Column -->
               <div class="col-md-6 scrollable-section">
                 <h3>Sleep Pattern</h3>
