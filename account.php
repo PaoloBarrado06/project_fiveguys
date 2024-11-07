@@ -112,6 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="d-flex">
 
+    
         <nav class="navbar-vertical d-flex flex-column align-items-center">
 
             <h1 class="title">UP</h1>
