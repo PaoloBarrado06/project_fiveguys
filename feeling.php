@@ -62,7 +62,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Emotion Selector</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Styles go here */
+        .emotion-face {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px; 
+    height: 80px;
+    margin: 5px; 
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden; 
+    }
+
+    .emotion-face img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .emotion-face:hover img {
+        transform: scale(1.1); 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+        max-width: 600px; 
+        margin: auto;
+        padding: 20px;
+    }
     </style>
 </head>
 <body>
@@ -90,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <!-- Selected emotion header -->
-            <h4 id="selectedEmotion" class="selected-emotion">Select an emotion above</h4>
+            <h4 id="selectedEmotion" class="selected-emotion" style="text-align:center;">Select an emotion above</h4>
 
             <!-- Hidden input to store the selected emotion -->
             <input type="hidden" name="emotion" id="emotionInput" value="">
