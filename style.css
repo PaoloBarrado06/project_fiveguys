@@ -208,3 +208,40 @@ aside {
 .carousel-indicators{
   margin-bottom: -10px;
 }
+
+.card-group {
+  display: flex;
+    
+  gap: 10px;
+}
+.card {
+  flex: 1;
+  max-width: 14%; /* Adjust this for better spacing */
+}
+
+/* Style for the icons inside the carousel cards */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-body img {
+  width: 80px; /* Make the icons the same size */
+  height: 80px;
+  border-radius: 50%; /* Make the icons circular */
+  margin-top: 10px; /* Add some space between the text and the icon */
+  object-fit: cover; /* Ensure the image maintains aspect ratio */
+}
+
+
+.card-body h5 {
+  margin-bottom: 10px;
+  font-size: 16px;  /* Adjust font size */
+}
+
+
+
+
