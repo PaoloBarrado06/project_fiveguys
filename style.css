@@ -53,6 +53,10 @@ aside {
   font-family: 'lexend-bold';
   src: url(fonts/Lexend-Bold.ttf);
 }
+@font-face {
+  font-family: 'parkinsans';
+  src: url(fonts/Parkinsans-VariableFont_wght.ttf);
+}
 
 .title{
   font-family: 'lexend-bold', sans-serif;
@@ -73,11 +77,9 @@ aside {
   color: #0d3569;
   margin: 0;
   padding: 0;
-  position: relative;
-  right: 80px;
-  bottom: 20px;
+  margin-left: -289px;
+  margin-top:-20px;
 }
-
 
 .bottom-content{
   margin-top: 350px;
@@ -137,7 +139,7 @@ aside {
 
 .emotion-image {
   width: 50px;
-  height: 50px;
+  height: auto;
   border-radius: 50%;
   text-align: center;
   line-height: 50px;
@@ -149,7 +151,12 @@ aside {
   max-height: 370px;
   overflow-y: auto;
   scrollbar-width: none; /* For Firefox */
+  margin-right: 10px;
 }
+.scrollable-section:last-child {
+  margin-right: 0; /* Remove margin from the last column */
+}
+
 
 .scrollable-section::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Opera */
@@ -180,9 +187,8 @@ aside {
 .col-md-6{
   margin-top: -30px;
   background-color: #d4e0f1;
-  border: 20px solid #f5f5f5; /* Add a border */
-  padding: 15px; /* Add padding for spacing inside the container */
-  border-radius: 30px;
+  border: 20px solid transparent; /* Add a border */
+  border-radius: 10px;
 }
 
 .fixed-header{
@@ -190,11 +196,11 @@ aside {
 }
 
 .carousel-inner{
-  margin-top: 10px;
+  margin-top: 30px;
   margin-left: -10px;
 }
 .card-group{
-  margin: 30px;
+  margin: 50px;
 }
 
 .carousel-control-prev{
@@ -241,6 +247,35 @@ aside {
   margin-bottom: 10px;
   font-size: 16px;  /* Adjust font size */
 }
+
+.fs-4{
+  font-family: 'lexend-bold', sans-serif;
+  color: #d4e0f1;
+}
+.welcome{
+  font-size: 40px;
+}
+.textarea[readonly] {
+  background-color: white; /* Removes gray background */
+  color: inherit; /* Ensures text color matches the rest of the modal */
+  border: 1px solid #ced4da; /* Optional: keeps a consistent border */
+  cursor: default; /* Optional: makes it clear the input cannot be edited */
+  box-shadow: none !important; /* Removes any potential shadows */
+}
+.welcome{
+  font-family: 'parkinsans';
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

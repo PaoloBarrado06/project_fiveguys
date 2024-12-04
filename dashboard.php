@@ -8,7 +8,7 @@ $password = $_SESSION['password'];
 $birthdate = $_SESSION['birthdate'];
 $id = $_SESSION['id'];
 
-$sql = "SELECT date, emotion FROM survey WHERE tid='$id'";
+$sql = "SELECT date, emotion, reason FROM survey WHERE tid='$id'";
 $result = $mysqli->query($sql);
 
 $emotionIcons = [
@@ -37,11 +37,35 @@ $emotionIcons = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 
 <body>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', function () {
+            const date = this.querySelector('.card-title').innerText;
+            const emotionImgSrc = this.querySelector('.emotion-image').getAttribute('src');
+            const emotionAlt = this.querySelector('.emotion-image').getAttribute('alt');
+            const reason = this.getAttribute('data-reason'); // Get the 'data-reason' attribute
+
+            // Populate modal
+            document.getElementById('modalDate').innerText = date; // Set date as header text
+            document.getElementById('modalEmotionImage').src = emotionImgSrc;
+            document.getElementById('modalEmotionImage').alt = emotionAlt;
+            document.getElementById('modalEmotionText').innerText = emotionAlt; // Set emotion description
+            document.getElementById('modalReason').value = reason || "No reason provided."; // Handle empty reasons
+
+            // Show modal
+            new bootstrap.Modal(document.getElementById('emotionModal')).show();
+        });
+        });
+    });
+    </script>
+    <script language="JavaScript"><!--
+    javascript:window.history.forward(1);
+    //--></script>
 
     <div class="d-flex">
 
@@ -74,13 +98,12 @@ $emotionIcons = [
         <div id="about" class="container">
 
             <h1 class="title2">LIFT</h1>
-
-            <h1>Welcome! <span style='color:#0d3569;'><?php echo htmlspecialchars($username); ?></span></h1>
+            <h1 class="welcome" style="font-size:50px;";>Welcome! <span style='color:#0d3569;'><?php echo htmlspecialchars($username); ?></span></h1>
             <br><br>
             
             <div class="row" style="margin-bottom: -33px;">
               <!-- Education Column -->
-              <div class="col-md-6 scrollable-section">
+              <div class="col-md-6 scrollable-section" style="flex: 0 0 45%;"> 
 
                 <h3>Sleep Pattern</h3>
                     <!-- Sleep Pattern Cards -->
@@ -145,7 +168,7 @@ $emotionIcons = [
                     
               </div>
               <!-- Experience Column -->
-              <div class="col-md-6 scrollable-section">
+              <div class="col-md-6 scrollable-section" style="flex: 0 0 48%;"> 
                 <h2>Daily Fun Facts</h2>
                 <div class="timeline">
                   <div class="timeline-item">
@@ -215,7 +238,7 @@ $emotionIcons = [
 
                 // Add card to the current slide
                 echo "
-                <div class='card '>
+                <div class='card' data-reason='" . htmlspecialchars($row['reason']) . "'>
                     <div class='card-body'>
                         <h5 class='card-title'>$formattedDate</h5>
                         <img src='$icon' class='emotion-image' alt='$emotion'>
@@ -265,6 +288,38 @@ $emotionIcons = [
             }
         </style>
     </div>
+    <div class="modal fade" id="emotionModal" tabindex="-1" aria-labelledby="emotionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center" id="emotionModalLabel">Emotion Details</h5>
+            </div>
+            <div class="modal-body text-center">
+                <!-- Date as a Header -->
+                <h3 id="modalDate" class="mb-3"></h3>
+                
+                <!-- Emotion Image -->
+                <div class="mb-3">
+                    <img id="modalEmotionImage" src="" alt="Emotion Icon" style="width:200px; height:auto;" />
+                </div>
+                
+                <!-- Emotion Description -->
+                <h4 id="modalEmotionText" class="text-capitalize"></h4>
+                
+                <!-- Reason -->
+                <div class="mb-3">
+                    <label for="modalReason" class="form-label">Reason:</label>
+                    <textarea class="form-control" id="modalReason" rows="3" readonly></textarea>
+                </div>
+            </div>
+            <!-- Centered Footer Button -->
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
 </body>
